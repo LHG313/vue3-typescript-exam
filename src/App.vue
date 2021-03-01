@@ -1,5 +1,7 @@
 <template>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, pariatur? Cumque alias, repellat blanditiis dignissimos molestias pariatur in voluptates ratione? Voluptatem minus, nisi obcaecati exercitationem debitis ab voluptas consectetur asperiores.
+  <div class="container mx-auto bg-red-500">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse reprehenderit, autem nisi fugiat pariatur quaerat optio nam? Modi impedit vero, ex eius obcaecati culpa, vel aut laborum necessitatibus corporis quisquam?
+  </div>
 </template>
 
 <script lang="ts">

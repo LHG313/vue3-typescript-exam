@@ -1,10 +1,11 @@
 <template>
-   <header class="header-bar h-40 bg-black text-white">
-  <div class="container mx-auto flex h-full">
-     <router-link to="/" class="h-full flex items-center">
+  <header class="header-bar h-40 bg-black text-white">
+    <div class="container mx-auto flex h-full">
+      <router-link to="/" class="h-full flex items-center">
         <img class="block w-20" src="./assets/logo.png" alt="">
       </router-link>
-     <div class="flex-grow"></div>
+
+      <div class="flex-grow"></div>
 
       <nav class="header-bar__menu-box-1">
         <ul class="flex h-full">
@@ -22,24 +23,25 @@
       </nav>
     </div>
   </header>
-   <main>
+  <main>
     <router-view></router-view>
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
 export default defineComponent({
   name: 'App',
 })
 </script>
 
+<style lang="postcss">
+</style>
+
 <style>
 html, body {
   margin:0;
 }
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

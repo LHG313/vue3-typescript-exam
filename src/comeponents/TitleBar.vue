@@ -1,6 +1,6 @@
 <template>
-  <section class="title-bar">
-    <h1 class="container mx-auto">
+  <section class="title-bar px-2">
+    <h1 class="container mx-auto text-3xl mt-3 mb-3">
       <slot></slot>
     </h1>
   </section>

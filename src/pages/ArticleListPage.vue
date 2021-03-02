@@ -1,7 +1,7 @@
 <template>
   <TitleBar>게시물 리스트</TitleBar>
   
-  <section class="section section-article-write-form">
+  <section class="section section-article-write-form px-2">
     <div class="container mx-auto">
       <form v-on:submit.prevent="checkAndWriteArticle">
         <FormRow title="제목">
@@ -13,11 +13,6 @@
         <FormRow title="작성">
           <div class="btns">
             <input type="submit" value="작성" class="btn-primary" />
-            <input type="button" value="작성" class="btn-secondary" />
-            <input type="button" value="작성" class="btn-success" />
-            <input type="button" value="작성" class="btn-danger" />
-            <input type="button" value="작성" class="btn-warning" />
-            <input type="button" value="작성" class="btn-info" />
           </div>
         </FormRow>
       </form>

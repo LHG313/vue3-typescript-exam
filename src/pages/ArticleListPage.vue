@@ -1,5 +1,5 @@
 <template>
-<TitleBar title="게시물 리스트"/>
+<TitleBar>게시물 리스트</TitleBar>
 </template>
 
 <script lang="ts">
@@ -11,4 +11,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
 </style>

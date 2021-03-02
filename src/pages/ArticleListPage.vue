@@ -19,7 +19,6 @@
     </div>
   </section>
 
-
   <section class="section section-article-list px-2">
     <div class="container mx-auto">
   
@@ -57,13 +56,29 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue'
+import { defineComponent, ref, reactive, getCurrentInstance, onMounted } from 'vue'
 import { Article } from '../dtos/'
+import {IArticle} from '../types/'
+import {MainApi} from '../apis/'
+
 export default defineComponent({
   name: 'ArticleListPage',
   setup() {
+    const mainApi:MainApi = getCurrentInstance()?.appContext.config.globalProperties.$mainApi;
+
+    
+    function loadArticles() {
+      mainApi.article_list(1)
+      .then(axiosResponse => {
+        console.log(axiosResponse.data.body.articles);
+      });
+    }
+
+    onMounted(loadArticles);
+
     const newArticleTitleElRef = ref<HTMLInputElement>();
     const newArticleBodyElRef = ref<HTMLInputElement>();
+
     const state = reactive({
       articles: [] as Article[]
     });
@@ -95,6 +110,7 @@ export default defineComponent({
     }
     function writeArtile(title:string, body:string) {
       const newArticle = new Article(title, body);
+      
       state.articles.push(newArticle);
     }
     return {

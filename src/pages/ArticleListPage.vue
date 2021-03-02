@@ -1,5 +1,8 @@
 <template>
 <TitleBar>게시물 리스트</TitleBar>
+<input type="checkbox" />
+<input type="radio" />
+<input type="radio" />
 </template>
 
 <script lang="ts">

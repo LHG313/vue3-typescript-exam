@@ -57,31 +57,34 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive, getCurrentInstance, onMounted } from 'vue'
-import { Article } from '../dtos/'
+import {useRoute} from 'vue-router'
 import {IArticle} from '../types/'
 import {MainApi} from '../apis/'
 
 export default defineComponent({
   name: 'ArticleListPage',
   setup() {
+    const route = useRoute()
     const mainApi:MainApi = getCurrentInstance()?.appContext.config.globalProperties.$mainApi;
-
-    
-    function loadArticles() {
-      mainApi.article_list(1)
-      .then(axiosResponse => {
-        console.log(axiosResponse.data.body.articles);
-      });
-    }
-
-    onMounted(loadArticles);
 
     const newArticleTitleElRef = ref<HTMLInputElement>();
     const newArticleBodyElRef = ref<HTMLInputElement>();
 
     const state = reactive({
-      articles: [] as Article[]
+      articles: [] as IArticle[]
     });
+
+    function loadArticles(boardId:number) {
+      mainApi.article_list(boardId)
+      .then(axiosResponse => {
+        state.articles = axiosResponse.data.body.articles
+      });
+    }
+
+    onMounted(() => {
+      loadArticles(2);
+    });
+
     function checkAndWriteArticle() {
       if ( newArticleTitleElRef.value == null ) {
         return;
@@ -109,9 +112,7 @@ export default defineComponent({
       newArticleTitleEl.focus();
     }
     function writeArtile(title:string, body:string) {
-      const newArticle = new Article(title, body);
-      
-      state.articles.push(newArticle);
+
     }
     return {
       state,

@@ -8,28 +8,34 @@ import App from './App.vue'
 import './index.css'
 
 // 전역 컴포넌트 불러오기
-import TitleBar from './comeponents/TitleBar.vue'
-import FormRow from './comeponents/FormRow.vue'
+import TitleBar from './components/TitleBar.vue';
+import FormRow from './components/FormRow.vue';
 
 // 페이지 불러오기
 import HomeMainPage from './pages/HomeMainPage.vue'
 import ArticleListPage from './pages/ArticleListPage.vue'
 
 // MainApi 불러오기
-import {MainApi} from './apis'
+import { MainApi } from './apis/'
 
 // MainApi 객체 생성
 const mainApi = new MainApi();
 
 // 라우팅 정보 구성
 const routes = [
-  { path: '/', component: HomeMainPage },
-  { path: '/article/list', component: ArticleListPage }
-]
+  {
+    path: '/',
+    component: HomeMainPage,
+  },
+  {
+    path: '/article/list',
+    component: ArticleListPage,
+    props: (route:any) => ({ boardId: route.query.boardId })
+  },
+];
 
 // 라우터 생성
 const router = createRouter({
-  
   history: createWebHistory(),
   routes
 })
@@ -37,7 +43,7 @@ const router = createRouter({
 // 앱 생성
 const app = createApp(App)
 
-// 전역 라이브러리 등록
+// 전력 라이브러리 등록
 app.config.globalProperties.$mainApi = mainApi;
 
 // 전역 컴포넌트 등록

@@ -22,6 +22,11 @@
   <section class="section section-article-list px-2">
     <div class="container mx-auto">
 
+      <div class="btns mt-6">
+        <router-link class="btn-info" to="/article/list?boardId=1">공지사항 게시판</router-link>
+        <router-link class="btn-info" to="/article/list?boardId=2">자유 게시판</router-link>
+      </div>
+
       <div class="mt-6" v-bind:key="article.id" v-for="article in state.articles">
         <div class="px-10 py-6 bg-white rounded-lg shadow-md">
           <div class="flex justify-between items-center">
@@ -56,14 +61,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, getCurrentInstance, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { defineComponent, ref, reactive, getCurrentInstance, onMounted, watch } from 'vue'
 import { IArticle } from '../types/'
 import { MainApi } from '../apis/'
 export default defineComponent({
   name: 'ArticleListPage',
-  setup() {
-    const route = useRoute();
+  props: {
+    boardId: {
+      type: Number,
+      required: true,
+      default:1
+    }
+  },
+  setup(props) {
     const mainApi:MainApi = getCurrentInstance()?.appContext.config.globalProperties.$mainApi;
     const newArticleTitleElRef = ref<HTMLInputElement>();
     const newArticleBodyElRef = ref<HTMLInputElement>();
@@ -77,10 +87,11 @@ export default defineComponent({
       });
     }
     onMounted(() => {
-      const boardId:number = parseInt(route.query.boardId as string ?? "1");
-       
-      loadArticles(boardId);
+      loadArticles(props.boardId);
     });
+    watch(() => props.boardId, (newValue, oldValue) => {
+      loadArticles(props.boardId);
+    })
     function checkAndWriteArticle() {
       if ( newArticleTitleElRef.value == null ) {
         return;

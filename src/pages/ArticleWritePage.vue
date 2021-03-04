@@ -1,0 +1,90 @@
+<template>
+  <TitleBar>게시물 작성</TitleBar>
+  
+  <section class="section section-article-write-form px-2">
+    <div class="container mx-auto">
+      <form v-on:submit.prevent="checkAndWriteArticle">
+        <FormRow title="제목">
+          <input ref="newArticleTitleElRef" class="form-row-input" type="text" placeholder="제목을 입력해주세요.">
+        </FormRow>
+        <FormRow title="내용">
+          <textarea ref="newArticleBodyElRef" class="form-row-input" placeholder="내용을 입력해주세요."></textarea>
+        </FormRow>
+        <FormRow title="작성">
+          <div class="btns">
+            <input type="submit" value="작성" class="btn-primary" />
+          </div>
+        </FormRow>
+      </form>
+    </div>
+  </section>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref, reactive, getCurrentInstance, onMounted, watch } from 'vue'
+import { IArticle } from '../types/'
+import { MainApi } from '../apis/'
+import { Router } from 'vue-router';
+export default defineComponent({
+  name: 'ArticleListPage',
+  props: {
+    boardId: {
+      type: Number,
+      required: true,
+      default:1
+    }
+  },
+  setup(props) {
+    const router:Router = getCurrentInstance()?.appContext.config.globalProperties.$router;
+    const mainApi:MainApi = getCurrentInstance()?.appContext.config.globalProperties.$mainApi;
+    const newArticleTitleElRef = ref<HTMLInputElement>();
+    const newArticleBodyElRef = ref<HTMLInputElement>();
+    const state = reactive({
+      articles: [] as IArticle[]
+    });
+    function checkAndWriteArticle() {
+      if ( newArticleTitleElRef.value == null ) {
+        return;
+      }
+      const newArticleTitleEl = newArticleTitleElRef.value;
+      newArticleTitleEl.value = newArticleTitleEl.value.trim();
+      if ( newArticleTitleEl.value.length == 0 ) {
+        alert('제목을 입력해주세요.');
+        newArticleTitleEl.focus();
+        return;
+      }
+      if ( newArticleBodyElRef.value == null ) {
+        return;
+      }
+      const newArticleBodyEl = newArticleBodyElRef.value;
+      newArticleBodyEl.value = newArticleBodyEl.value.trim();
+      if ( newArticleBodyEl.value.length == 0 ) {
+        alert('내용을 입력해주세요.');
+        newArticleBodyEl.focus();
+        return;
+      }
+      writeArtile(newArticleTitleEl.value, newArticleBodyEl.value);
+      newArticleTitleEl.value = '';
+      newArticleBodyEl.value = '';
+      newArticleTitleEl.focus();
+    }
+    function writeArtile(title:string, body:string) {
+      mainApi.article_doWrite(props.boardId, title, body)
+        .then(axiosResponse => {
+          const newArticleId = axiosResponse.data.body.id;
+          alert(newArticleId + "번 글이 생성되었습니다.");
+          router.push("detail?id=" + newArticleId);
+        });
+    }
+    return {
+      state,
+      checkAndWriteArticle,
+      newArticleTitleElRef,
+      newArticleBodyElRef
+    }
+  }
+})
+</script>
+
+<style scoped>
+</style>

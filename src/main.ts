@@ -14,6 +14,8 @@ import FormRow from './components/FormRow.vue';
 // 페이지 불러오기
 import HomeMainPage from './pages/HomeMainPage.vue'
 import ArticleListPage from './pages/ArticleListPage.vue'
+import ArticleWritePage from './pages/ArticleWritePage.vue'
+import ArticleDetailPage from './pages/ArticleDetailPage.vue'
 
 // MainApi 불러오기
 import { MainApi } from './apis/'
@@ -32,6 +34,16 @@ const routes = [
     component: ArticleListPage,
     props: (route:any) => ({ boardId: route.query.boardId })
   },
+  {
+    path: '/article/detail',
+    component: ArticleDetailPage,
+    props: (route:any) => ({ id: route.query.id })
+  },
+  {
+    path: '/article/write',
+    component: ArticleWritePage,
+    props: (route:any) => ({ boardId: route.query.boardId })
+  },
 ];
 
 // 라우터 생성
@@ -45,6 +57,7 @@ const app = createApp(App)
 
 // 전력 라이브러리 등록
 app.config.globalProperties.$mainApi = mainApi;
+app.config.globalProperties.$router = router;
 
 // 전역 컴포넌트 등록
 app.component('TitleBar', TitleBar);

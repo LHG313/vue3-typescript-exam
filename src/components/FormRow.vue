@@ -23,6 +23,10 @@ export default defineComponent({
 </script>
 
 <style lang="postcss">
+.form-row-select {
+  @apply w-full rounded-sm;
+}
+
 .form-row-input{
   @apply w-full rounded-sm;
 }

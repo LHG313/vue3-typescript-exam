@@ -7,25 +7,25 @@
 
       <div class="flex-grow"></div>
 
-      <nav class="header-bar__menu-box-1">
+      <nav class="header-bar__menu-box-1  overflow-x-auto">
         <ul class="flex h-full">
           <li>
-            <router-link to="/" class="h-full flex items-center font-bold px-4 hover:bg-white hover:text-black">
+            <router-link to="/" class="h-full flex items-center font-bold px-4 hover:bg-white hover:text-black whitespace-nowrap">
               홈
             </router-link>
           </li>
           <li>
-            <router-link to="/article/write" class="h-full flex items-center font-bold px-4 hover:bg-white hover:text-black">
+            <router-link to="/article/write" class="h-full flex items-center font-bold px-4 hover:bg-white hover:text-black whitespace-nowrap">
               글 작성
             </router-link>
           </li>
           <li>
-            <router-link to="/article/list?boardId=1" class="h-full flex items-center font-bold px-4 hover:bg-white hover:text-black">
+            <router-link to="/article/list?boardId=1" class="h-full flex items-center font-bold px-4 hover:bg-white hover:text-black whitespace-nowrap">
               공지사항 리스트
             </router-link>
           </li>
           <li>
-            <router-link to="/article/list?boardId=2" class="h-full flex items-center font-bold px-4 hover:bg-white hover:text-black">
+            <router-link to="/article/list?boardId=2" class="h-full flex items-center font-bold px-4 hover:bg-white hover:text-black whitespace-nowrap">
               자유 리스트
             </router-link>
           </li>

@@ -115,7 +115,7 @@ export class MainApi extends HttpClient {
   };
 
   protected _handleResponse(axiosResponse:AxiosResponse) : AxiosResponse {
-    if ( axiosResponse?.data?.resultCode == "F-B" ) {
+    if ( ["F-A", "F-B"].includes(axiosResponse?.data?.resultCode) ) {
       alert('로그인 후 이용해주세요.');
       location.replace('/member/login');
     }

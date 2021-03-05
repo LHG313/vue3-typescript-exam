@@ -75,6 +75,8 @@ abstract class HttpClient {
 interface Base__IResponseBodyType1 {
   resultCode:string;
   msg:string;
+  fail:boolean;
+  success:boolean;
 }
 
 // /usr/article/list 의 응답 타입

@@ -69,21 +69,29 @@ export default defineComponent({
     function login(loginId:string, loginPw:string) {
       mainApi.member_authKey(loginId, loginPw)
         .then(axiosResponse => {
+          alert(axiosResponse.data.msg);
+
+          if( axiosResponse.data.fail){
+            return;
+          }
+
           const authKey = axiosResponse.data.body.authKey;
           const loginedMemberId = axiosResponse.data.body.id;
           const loginedMemberName = axiosResponse.data.body.name;
           const loginedMemberNickname = axiosResponse.data.body.nickname;
+
           localStorage.setItem("authKey", authKey);
           localStorage.setItem("loginedMemberId", loginedMemberId + "");
           localStorage.setItem("loginedMemberName", loginedMemberName);
           localStorage.setItem("loginedMemberNickname", loginedMemberNickname);
+
           props.globalShare.loginedMember = {
             authKey,
             id:loginedMemberId,
             name:loginedMemberName,
             nicknam:loginedMemberNickname,
           };
-          alert(axiosResponse.data.msg);
+          
           router.replace('/')
         });
     }

@@ -14,6 +14,16 @@
               홈
             </router-link>
           </li>
+          <li v-if="globalShare.isLogined == false">
+            <router-link to="/member/login" class="h-full flex items-center font-bold px-4 hover:bg-white hover:text-black whitespace-nowrap">
+              로그인
+            </router-link>
+          </li>
+          <li v-if="globalShare.isLogined == false">
+            <router-link to="/member/join" class="h-full flex items-center font-bold px-4 hover:bg-white hover:text-black whitespace-nowrap">
+              회원가입
+            </router-link>
+          </li>
           <li v-if="globalShare.isLogined">
             <router-link to="/article/write" class="h-full flex items-center font-bold px-4 hover:bg-white hover:text-black whitespace-nowrap">
               글 작성

@@ -3,7 +3,7 @@ export function isEmptyObject(param:{}) {
 }
 
 export function toInt(data:any, defaultValue:any) {
-  if (data == null){
+  if ( data == null ) {
     return defaultValue;
   }
 
@@ -11,5 +11,9 @@ export function toInt(data:any, defaultValue:any) {
 }
 
 export function toIntOrUnd(data:any) {
-    return toInt(data, undefined);
+  return toInt(data, undefined);
+}
+
+export function toIntOrNull(data:any) {
+  return toInt(data, null);
 }

@@ -1,3 +1,4 @@
+  
 import { createApp, reactive, computed } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -18,16 +19,23 @@ import HomeMainPage from './pages/HomeMainPage.vue'
 import ArticleListPage from './pages/ArticleListPage.vue'
 import ArticleWritePage from './pages/ArticleWritePage.vue'
 import ArticleDetailPage from './pages/ArticleDetailPage.vue'
+import MemberLoginPage from './pages/MemberLoginPage.vue'
 
 // 전역상태 만들기
-const globalShare:any = reactive({
-  loginedMember:{},
-  isLogined: computed(() => Util.isEmptyObject(globalShare.loginedMember) === false)
-});
+const authKey = localStorage.getItem("authKey")
+const loginedMemberId = Util.toIntOrNull(localStorage.getItem("loginedMemberId"))
+const loginedMemberName = localStorage.getItem("loginedMemberName")
+const loginedMemberNickname = localStorage.getItem("loginedMemberNickname")
 
-setTimeout(() => {
-  globalShare.loginedMember.id = 1;
-}, 1000);
+const globalShare:any = reactive({
+  loginedMember:{
+    authKey,
+    id:loginedMemberId,
+    name:loginedMemberName,
+    nicknam:loginedMemberNickname,
+  },
+  isLogined: computed(() => globalShare.loginedMember.id !== null )
+});
 
 // MainApi 불러오기
 import { MainApi } from './apis/'
@@ -56,6 +64,11 @@ const routes = [
     component: ArticleWritePage,
     props: (route:any) => ({ boardId: Util.toIntOrUnd(route.query.boardId), globalShare })
   },
+  {
+    path: '/member/login',
+    component: MemberLoginPage,
+    props: (route:any) => ({ globalShare })
+  }
 ];
 
 // 라우터 생성

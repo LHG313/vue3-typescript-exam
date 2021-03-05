@@ -1,6 +1,6 @@
 <template>
   <div class="form-row flex flex-col md:flex-row">
-    <div class="md:flex md:items-center md:w-20">
+    <div class="md:flex md:items-center md:w-28">
       <span>{{title}}</span>
     </div>
     <div class="md:flex-grow">

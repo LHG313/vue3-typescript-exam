@@ -126,6 +126,12 @@ export class MainApi extends HttpClient {
   protected _handleResponse(axiosResponse:AxiosResponse) : AxiosResponse {
     if ( ["F-A", "F-B"].includes(axiosResponse?.data?.resultCode) ) {
       alert('로그인 후 이용해주세요.');
+
+      localStorage.removeItem("authKey");
+      localStorage.removeItem("loginedMemberId");
+      localStorage.removeItem("loginedMemberName");
+      localStorage.removeItem("loginedMemberNickname");
+
       location.replace('/member/login');
     }
 

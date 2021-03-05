@@ -4,7 +4,7 @@
   <section class="section section-article-list px-2">
     <div class="container mx-auto">
       <div class="mt-6" v-bind:key="article.id" v-for="article in state.articles">
-        <div class="px-10 py-6 bg-white rounded-lg shadow-md">
+        <div class="px-6 py-6 bg-white rounded-lg shadow-md">
           <div class="flex justify-between items-center">
             <span class="font-light text-gray-600">
               {{ article.regDate }}

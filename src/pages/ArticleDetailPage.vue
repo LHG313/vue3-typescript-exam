@@ -89,6 +89,10 @@ import { MainApi } from '../apis/'
 export default defineComponent({
   name: 'ArticleDetailPage',
   props: {
+    globalShare: {
+      type: Object,
+      required: true
+    },
     id: {
       type: Number,
       required: true,

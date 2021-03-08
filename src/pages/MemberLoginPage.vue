@@ -26,12 +26,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, getCurrentInstance, onMounted } from 'vue'
-import { IArticle } from '../types/'
+import { defineComponent, ref, getCurrentInstance, onMounted } from 'vue'
 import { MainApi } from '../apis/'
+import { useRoute } from 'vue-router'
 import { Router } from 'vue-router';
+
+
 export default defineComponent({
-  name: 'ArticleWritePage',
+  name: 'MemberLoginPage',
   props: {
     globalShare: {
       type: Object,
@@ -39,10 +41,27 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const route = useRoute();
     const router:Router = getCurrentInstance()?.appContext.config.globalProperties.$router;
     const mainApi:MainApi = getCurrentInstance()?.appContext.config.globalProperties.$mainApi;
+
     const loginIdElRef = ref<HTMLInputElement>();
     const loginPwElRef = ref<HTMLInputElement>();
+
+onMounted(() => {
+      if ( route.query.loginId != null ) {
+        if ( loginIdElRef.value == null ) {
+          return;
+        }
+        if ( loginPwElRef.value == null ) {
+          return;
+        }
+        loginIdElRef.value.value = route.query.loginId as any;
+        loginPwElRef.value.focus();
+      }
+    })
+
+
     function checkAndLogin() {
       if ( loginIdElRef.value == null ) {
         return;

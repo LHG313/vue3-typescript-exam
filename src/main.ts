@@ -20,6 +20,7 @@ import ArticleListPage from './pages/ArticleListPage.vue'
 import ArticleWritePage from './pages/ArticleWritePage.vue'
 import ArticleDetailPage from './pages/ArticleDetailPage.vue'
 import MemberLoginPage from './pages/MemberLoginPage.vue'
+import MemberJoinPage from './pages/MemberJoinPage.vue'
 
 // 전역상태 만들기
 const authKey = localStorage.getItem("authKey")
@@ -75,6 +76,11 @@ const routes = [
   {
     path: '/member/login',
     component: MemberLoginPage,
+    props: (route:any) => ({ globalShare })
+  },
+  {
+    path: '/member/join',
+    component: MemberJoinPage,
     props: (route:any) => ({ globalShare })
   }
 ];
